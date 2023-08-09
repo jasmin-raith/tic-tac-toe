@@ -25,6 +25,12 @@ let fields = [
     null
 ];
 
+let WINNING_COMBINATIONS = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // horizontal
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // vertical
+    [0, 4, 8], [2, 4, 6], // diagonal
+];
+
 let currentPlayer = 'circle';
 
 
@@ -65,7 +71,28 @@ function handleClick(cell, index) {
         cell.innerHTML = currentPlayer === 'circle' ? generateCircleSVG() : generateCrossSVG();
         cell.onclick = null;
         currentPlayer = currentPlayer === 'circle' ? 'cross' : 'circle';
+
+        if (isGameFinished()) {
+            let winCombination = getWinningCombination();
+            drawWinningLine(winCombination);
+        }
     }
+}
+
+
+function isGameFinished() {
+    return fields.every((field) => field !== null) || getWinningCombination() !== null;
+}
+
+
+function getWinningCombination() {
+    for (let i = 0; i < WINNING_COMBINATIONS.length; i++) {
+        let [a, b, c] = WINNING_COMBINATIONS[i];
+        if (fields[a] === fields[b] && fields[b] === fields[c] && fields[a] !== null) {
+            return WINNING_COMBINATIONS[i];
+        }
+    }
+    return null;
 }
 
 
@@ -87,7 +114,7 @@ function generateCrossSVG() {
     let width = 70;
     let height = 70;
 
-    const svgHtml = `
+    let svgHtml = `
       <svg width="${width}" height="${height}">
         <line x1="0" y1="0" x2="${width}" y2="${height}"
           stroke="${color}" stroke-width="5">
@@ -103,4 +130,32 @@ function generateCrossSVG() {
     `;
 
     return svgHtml;
+}
+
+
+function drawWinningLine(combination) {
+    let lineColor = '#ffffff';
+    let lineWidth = 5;
+
+    let startCell = document.querySelectorAll(`td`)[combination[0]];
+    let endCell = document.querySelectorAll(`td`)[combination[2]];
+    let startRect = startCell.getBoundingClientRect();
+    let endRect = endCell.getBoundingClientRect();
+    let contentRect = document.getElementById('content').getBoundingClientRect();
+
+    let lineLength = Math.sqrt(
+        Math.pow(endRect.left - startRect.left, 2) + Math.pow(endRect.top - startRect.top, 2)
+    );
+    let lineAngle = Math.atan2(endRect.top - startRect.top, endRect.left - startRect.left);
+
+    let line = document.createElement('div');
+    line.style.position = 'absolute';
+    line.style.width = `${lineLength}px`;
+    line.style.height = `${lineWidth}px`;
+    line.style.backgroundColor = lineColor;
+    line.style.top = `${startRect.top + startRect.height / 2 - lineWidth / 2 - contentRect.top}px`;
+    line.style.left = `${startRect.left + startRect.width / 2 - contentRect.left}px`;
+    line.style.transform = `rotate(${lineAngle}rad)`;
+    line.style.transformOrigin = `top left`;
+    document.getElementById('content').appendChild(line);
 }
