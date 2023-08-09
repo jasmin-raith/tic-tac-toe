@@ -1,5 +1,5 @@
 body {
-    background-color: #a4ceeb;
+    background-color: #cba4eb;
     font-family: 'Open Sans', sans-serif;
     margin: 0;
 }
@@ -7,10 +7,28 @@ body {
 h1 {
     text-align: center;
     color: white;
+    font-size: 45px;
+}
+
+.player-panel {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+    margin-top: 120px;
+}
+
+.player-panel div {
+    display: flex;
+    align-items: center;
+}
+
+.player-inactive {
+    opacity: 0.5;
 }
 
 #content {
-    margin-top: 200px;
+    margin-top: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,8 +76,8 @@ table tr td:last-child {
     align-items: center;
 }
 
-.mt-32 {
-    margin-top: 32px;
+.mt-38 {
+    margin-top: 38px;
 }
 
 button {
@@ -68,12 +86,12 @@ button {
     border-radius: 5px;
     border: 2px solid #fff;
     color: #fff;
-    background-color: #42a1e3;
+    background-color: #d042e3;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #6fbaed;
+    background-color: #e26fed;
 }

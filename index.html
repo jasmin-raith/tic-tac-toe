@@ -11,10 +11,19 @@
 <body onload="init()">
 
     <h1>Tic Tac Toe</h1>
+
+    <div class="player-panel">
+        <div id="player1" style="margin-right: 24px;">
+            <img src="img/circle.png" height="40px" style="margin-right: 10px;"> Player 1
+        </div>
+        <div class="player-inactive" id="player2">
+            <img src="img/cross.png" height="55px"> Player 2
+        </div>
+    </div>
     
     <div id="content"></div>
 
-    <div class="center mt-32">
+    <div class="center mt-38">
         <button onclick="restartGame()">Spiel neu starten</button>
     </div>
 

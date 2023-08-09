@@ -77,6 +77,9 @@ function restartGame(){
         null,
         null,
     ];
+    document.getElementById('player1').classList.remove('player-inactive');
+    document.getElementById('player2').classList.add('player-inactive');
+    currentPlayer = 'circle';
     render();
 }
 
@@ -113,6 +116,9 @@ function getWinningCombination() {
 
 
 function generateCircleSVG() {
+    document.getElementById('player2').classList.remove('player-inactive');
+    document.getElementById('player1').classList.add('player-inactive');
+
     let color = '#743deb';
     let width = 70;
     let height = 70;
@@ -126,7 +132,10 @@ function generateCircleSVG() {
 
 
 function generateCrossSVG() {
-    let color = '#ed7811';
+    document.getElementById('player1').classList.remove('player-inactive');
+    document.getElementById('player2').classList.add('player-inactive');
+
+    let color = '#c731de';
     let width = 70;
     let height = 70;
 
