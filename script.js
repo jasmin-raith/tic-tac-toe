@@ -135,7 +135,7 @@ function generateCrossSVG() {
     document.getElementById('player1').classList.remove('player-inactive');
     document.getElementById('player2').classList.add('player-inactive');
 
-    let color = '#c731de';
+    let color = '#ed58d2';
     let width = 70;
     let height = 70;
 
@@ -159,7 +159,7 @@ function generateCrossSVG() {
 
 
 function drawWinningLine(combination) {
-    let lineColor = '#ffffff';
+    let lineColor = 'black';
     let lineWidth = 5;
 
     let startCell = document.querySelectorAll(`td`)[combination[0]];
